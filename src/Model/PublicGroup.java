@@ -12,19 +12,18 @@ public class PublicGroup extends Group {
 		// TODO Auto-generated constructor stub
 	}
 
-	public boolean inviteByMember(User user, User invitedMember) {
-		if (isMember(user)) {
-
+	public boolean inviteByMember(User invitingMember) {
+		if (!isMember(invitingMember)) {
+			listOfUsers.add(invitingMember);
+			return true;
 		}
 		return false;
 	}
 
-	public String createJoinCode(User user) {
-		if (isMember(user)) {
-			this.joinCode = getAlphaNumericString(8);
-			return this.joinCode;
-		}
-		return null;
+	public String createJoinCode() {
+		this.joinCode = getAlphaNumericString(8);
+		return this.joinCode;
+
 	}
 
 	public boolean joinByCode(User user, String code) {
