@@ -3,12 +3,14 @@ package UserSevice;
 import java.util.Scanner;
 
 import Model.DataStorge;
+import Model.User;
 
 public class Menu {
 
 	private Scanner sc;
 	private UserManager mngUser;
 	private DataStorge dateStorage;
+	private User user = null;
 
 	public Menu() {
 		dateStorage = new DataStorge("D:\\SavePoint", "BackupData.dat");
@@ -45,6 +47,9 @@ public class Menu {
 	}
 
 	private void printMenu() {
+		if (user != null) {
+			System.out.println("Welcome " + user.getUserName());
+		}
 		System.out.println("----------------\n1.Add Full-time Employee" + "\n2.Login" + "\n3.Search" + "\n10.Exit");
 	}
 
@@ -76,8 +81,9 @@ public class Menu {
 		userName = sc.nextLine();
 		System.out.print("Enter password: ");
 		password = sc.nextLine();
-
-		if (mngUser.login(userName, password)) {
+		User temporary = mngUser.login(userName, password);
+		if (temporary != null) {
+			this.user = temporary;
 			System.out.println("Login successful");
 		} else {
 			System.out.println("Login unsuccessful");
@@ -89,7 +95,7 @@ public class Menu {
 		String keyword;
 		System.out.print("Enter keyword: ");
 		keyword = sc.nextLine();
-		String result = mngUser.login(keyword);
+		String result = mngUser.Search(keyword);
 		if (result.length() > 0) {
 			System.out.println(result);
 		} else {

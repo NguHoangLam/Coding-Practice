@@ -41,15 +41,15 @@ public class DataStorge {
 
 	}
 
-	public boolean checkAccount(String username, String password) {
+	public User checkAccount(String username, String password) {
 		int id = checkUsername(username);
 		if (id > -1) {
 			if (listAccount.get(id).getPassword().compareTo(doMD5(password)) == 0) {
-				return true;
+				return listAccount.get(id);
 			}
-			return false;
+			return null;
 		}
-		return false;
+		return null;
 	}
 
 	public boolean addNewAccount(String lastName, String firstName, String password, String gender, String dateOfBirth,

@@ -1,6 +1,7 @@
 package UserSevice;
 
 import Model.DataStorge;
+import Model.User;
 
 public class UserManager {
 	DataStorge dataStorge;
@@ -14,11 +15,11 @@ public class UserManager {
 		return dataStorge.addNewAccount(lastName, firstName, password, gender, dateOfBirth, userName);
 	}
 
-	public boolean login(String username, String password) {
+	public User login(String username, String password) {
 		return dataStorge.checkAccount(username, password);
 	}
 
-	public String login(String keyword) {
+	public String Search(String keyword) {
 		return dataStorge.findFriendByName(keyword);
 
 	}
